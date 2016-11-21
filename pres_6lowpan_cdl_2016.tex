@@ -14,16 +14,15 @@
 
 
 \renewcommand{\familydefault}{\sfdefault}
-% \usepackage{helvet}
-\usepackage{avant}
+\usepackage{helvet}
+%\usepackage{avant}
 \usepackage[T1]{fontenc}
 
 
-%Global Background must be put in preamble
-\usebackgroundtemplate%
-{%
-    \includegraphics[width=\paperwidth,height=\paperheight]{bg.jpg}%
-}
+%\usebackgroundtemplate
+%{
+%    \includegraphics[width=\paperwidth,height=\paperheight]{img/bg.jpg}
+%}
 
 
 \title{Réseaux de capteurs OpenSource}
@@ -98,8 +97,9 @@ J'aime bien quand toutes les machines causent entre elles et que même ca s'apel
 \begin{frame}
 \frametitle{Moi}
 
-\includegraphics{img/calaos_about_logo.png}
 \begin{center}
+\includegraphics{img/calaos_about_logo.png}
+\newline
 J'aime la domotique et surtout le projet Calaos. (GPLv3!)
 \end{center}
 \end{frame}
@@ -181,9 +181,6 @@ Pour toutes ces raisons, j'ai commencé à m'intéresser aux capteurs de réseau
 \item la RFC4919 https://tools.ietf.org/html/rfc4919: IPv6 over Low-Power Wireless Personal Area Networks (6LoWPANs)
 \item ma RFC4944 https://tools.ietf.org/html/rfc4944 :  Transmission of IPv6 Packets over IEEE 802.15.4 Networks
 \end{itemize}
-
-Allez on les lis !
-
 \end{frame}
 
 \begin{frame}
@@ -332,6 +329,12 @@ On a besoin de :
 \end{frame}
 
 \begin{frame}
+\frametitle{Mise en place}
+\includegraphics[width=12cm,height=7cm]{img/6lowpan.png}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Machine émettrice}
 \begin{center}
 SensorTAG de Texas Instruments
@@ -355,7 +358,10 @@ SensorTAG de Texas Instruments
 \begin{frame}
 \frametitle{Machine réceptrice}
 
-Un PC avec un GNU/Linux
+Un PC avec un GNU/Linux ou tout autre solution compatible IPv6
+
+
+Et même IPv4
 
 \end{frame}
 
@@ -363,14 +369,16 @@ Un PC avec un GNU/Linux
 \frametitle{Passerelle}
 
 Une RaspberryPI et un SensorTAG pour le support du 802.15.4
-
+\includegraphics[width=10cm,height=5cm]{img/border_router.jpg}
 \end{frame}
 
 \begin{frame}
 \frametitle{Coût Total}
 \begin{itemize}
-\item Une RaspberryPI : 45€
-\item Un SensorTAG : 30€
+\item Une RaspberryPI : 45 euros
+\item Un SensorTAG pour le BR: 30 euros
+\item Un pack debug (pour l'USB série) : 30 euros
+\item Un SensorTAG : 30 euros
 \item Un PC : on le compte ?
 \end{itemize}
 \end{frame}
@@ -378,12 +386,12 @@ Une RaspberryPI et un SensorTAG pour le support du 802.15.4
 \begin{frame}
 \frametitle{SensorTag}
 \begin{itemize}
-\item Carte de dev « prête » à l’emploi développée par Texas Instrument
+\item Carte de dev "prête" à l’emploi développée par Texas Instrument
 \item Cortex M3 48MHz 128KB de Flash 8KB de RAM
 \item Flash externe de 512KB (pour mise à jour OTA ou stockage)
 \item Consommation 10mA en émission, 100uA en veille
 \item Radio 802.15.4 ET Bluetooth Low Energy (BLE)
-\item 30\$ en quantités limité sur le site de TI (max 3 par commandes :'( :'( :'( )
+\item 30 euros en quantités limitées sur le site de TI (max 3 par commandes :'( :'( :'( )
 \item Fonctionnement sur pile boutons
 \end{itemize}
 \end{frame}
@@ -392,7 +400,7 @@ Une RaspberryPI et un SensorTAG pour le support du 802.15.4
 \frametitle{SensorTag}
 
 Les SensorTAG supportent l'OS Contiki.
-
+\newline
 Génial c'est Open Source (licence BSD)
 
 \end{frame}
@@ -427,10 +435,6 @@ Une configuration typique :
  \end{itemize}
 \end{frame}
 
-
-
-
-
 \begin{frame}
 \frametitle{Contiki}
 
@@ -453,15 +457,16 @@ La pile Ip de contiki uIP a été initialement publié en 2011 et est aujourd'hu
 \frametitle{Contiki}
 Contiki est développé par une équipe de développeurs du domaine de l'industrie et du domaine universitaire. 
 Le développeur principal :
-Adam Dunkels
-Swedish Institute of Computer Science.
+\begin{itemize}
+\item Adam Dunkels
+\item Swedish Institute of Computer Science.
+\end{itemize}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Multitâche coopératif}
-
-%[img/multitache_coop.eps]
-
+\includegraphics[width=10cm,height=8cm]{img/multitache_coop.eps}
 \end{frame}
 
 
@@ -616,11 +621,14 @@ Il peut être configuré pour s'adapter a différente topologies réseau et inte
 \frametitle{6LBR}
 
 Le but de 6Lbr est d'interconnecter un réseau WSN basé sur le 802.15.4 et 6LowPan avec un réseau IPv6 basé sur l'Ethernet ou le Wifi.
+\newline
 Cette connexion peut être réalisé a différents niveaux du modèle OSI.
+\begin{itemize}
 
-- Au niveau 2, link layer            => on parle de pont réseau (bridge) ou de switch;
-- Au niveau 3, network layer     => on parle de routeur (router)
-- Au niveau 7, application layer => on parle de passerelle (gateway)
+\item Au niveau 2, link layer            => on parle de pont réseau (bridge) ou de switch;
+\item Au niveau 3, network layer     => on parle de routeur (router)
+\item Au niveau 7, application layer => on parle de passerelle (gateway)
+\end{itemize}
 
 6LBR est une plateforme prête a l'emploi pour interconnecter des réseaux 6LowPAN et des réseaux IP. Il part du principe qu'il existe une interface du côté IP et une autre de type 802.15.4 du côté 6LowPAN.
 \end{frame}
@@ -629,13 +637,12 @@ Cette connexion peut être réalisé a différents niveaux du modèle OSI.
 \frametitle{6LBR}
 
 Pour intégrer 6LBR sur notre RPI :
-
-Soit on prend Raspbian, et on compile en prenant les sources sur 
+\begin{itemize}
+\item Soit on prend Raspbian, et on compile en prenant les sources sur 
 https://github.com/cetic/6lbr/
-
-Soit on prend OpenEmbedded et on peux ajouter le layer meta-6lbr ici:
+\item Soit on prend OpenEmbedded et on peux ajouter le layer meta-6lbr ici:
 https://github.com/Openwide-Ingenierie/meta-6lbr
-
+\end{itemize}
 \end{frame}
 
 
@@ -648,6 +655,34 @@ Une fois que l'on a installé 6LBR sur la machine
 
 \section{Démo}
 
+\begin{frame}
+\frametitle{IFTTT}
 
+IFTTT = If This Then That
+\begin{itemize}
+\item Webservice permettant de connecter différents services web entre eux via des actions primaires.
+\item C'est assez limité, mais assez intéressant pour la démo.
+\item Permet de faire des requêtes HTTP via un "Channel Maker"
+Pas possible de faire du IFTATTT (If This and This Then That)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{IP64}
+\begin{itemize}
+\item Un problème pas d'IPv6 pour IFTTT !
+\item Il faut donc passer par de l'IPv4.
+\item 6LBR gère le IP64
+\item On encapsule les adresses IPV4 dans des adresses IPV6.
+\item Dans l'autre sens c'est du NAT 4 to 6.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Show me the code}
+\begin{center}
+https://github.com/Openwide-Ingenierie/contiki-boite-a-meuh
+\end{center}
+\end{frame}
 
 \end{document}
